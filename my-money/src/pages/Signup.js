@@ -1,14 +1,17 @@
 import { useState } from 'react';
+import useSignup from '../hooks/useSignup';
 import styles from './Signup.module.css';
 
 const Signup = () => {
     const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { signup, isPending, error } = useSignup(); 
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(displayName, email, password)
+        signup(displayName, email, password)
+        //console.log(displayName, email, password)
     }
     
         return <div>
@@ -37,6 +40,8 @@ const Signup = () => {
                     />
                 </label>
                 <button className='btn'>Sign Up</button>
+                {isPending && <button className='btn' disabled>...loading</button>}
+                { error && <p>{error}</p> }
             </form>
         </div>
     }
