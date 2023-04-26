@@ -12,6 +12,11 @@ const Signup = () => {
         e.preventDefault()
         signup(displayName, email, password)
         //console.log(displayName, email, password)
+        setEmail('')
+        setPassword('')
+        setDisplayName('')
+
+        
     }
     
         return <div>

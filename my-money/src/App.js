@@ -1,5 +1,6 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider, } from 'react-router-dom';
+import  useAuthContext  from './hooks/useAuthContext';
+import { createBrowserRouter, RouterProvider, redirect } from 'react-router-dom';
 //import { projectFirestore } from './config'; 
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -7,13 +8,23 @@ import Home from './pages/Homepage';
 import Root from './Root';
 //import Navbar from './components/Navbar';
 
+function App() {
+  const { authIsReady, user } = useAuthContext();
+
+const checkAuthLoader = () => {
+  if (user){
+    return redirect('/');
+  } 
+  return null
+}
+
 const router = createBrowserRouter([
   {path: '/', 
   element: <Root/>,
   children: [
   {path: '/', element: <Home/>}, 
   {path:'/Login', element: <Login/>},
-  {path: '/Signup', element: <Signup/> }
+  {path: '/Signup', element: <Signup/>, loader: checkAuthLoader}
   ],
 }
 ])
@@ -22,7 +33,8 @@ const router = createBrowserRouter([
 
 
 
-function App() {
+
+
 /*   const [data, setData] = useState(null);
   const [error, setError] = useState();
   const [pending, setPending] = useState(); */
@@ -56,8 +68,10 @@ function App() {
 
   return (
     <div className="App">
-     
+     { authIsReady && (
 <RouterProvider router={router} />
+     )
+}
     </div>
   )
 }

@@ -8,6 +8,8 @@ const useAuthContext = () => {
         throw Error('useAuthContext must be inside an AuthcontextProvider')
     }
 
+
+
     return context
 }
 
