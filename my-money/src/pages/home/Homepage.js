@@ -1,14 +1,24 @@
 import styles from './Home.module.css';
 import TransactionList from './TransactionList';
+import useAuthContext from '../../hooks/useAuthContext';
+//import useCollection from '../../hooks/useCollection';
+import ActualList from './ActualList';
 
 
 const Home = () => {
-
+const { user } = useAuthContext()
+//const {documents, error} = useCollection('transactions')
     return <div className={styles.container}>
-        <div className={styles.content}>Transaction List</div>
+        
+        {user &&
+        <>
+        <div className={styles.content}>
+           
+            <ActualList />
+            </div>
         <div className={styles.sidebar}>
-            <TransactionList></TransactionList>
-        </div>
+            <TransactionList uid={user.uid}></TransactionList>
+        </div></> }
     </div>
 }
 
