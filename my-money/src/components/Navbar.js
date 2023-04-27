@@ -20,7 +20,8 @@ const Navbar = () => {
 
             {user && (
             <>
-            <li>Hello {user.displayName}</li> 
+            <li>Hello {user.displayName}</li>
+             
             <li><form><button type="submit" className={styles.btn} onClick={logout}>Logout</button></form></li>
             </>
             )}

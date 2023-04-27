@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider, redirect } from 'react-router-dom'
 //import { projectFirestore } from './config'; 
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Home from './pages/Homepage';
+import Home from './pages/home/Homepage';
 import Root from './Root';
 //import Navbar from './components/Navbar';
 
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   element: <Root/>,
   children: [
   {path: '/', element: <Home/>}, 
-  {path:'/Login', element: <Login/>},
+  {path:'/Login', element: <Login/>, loader: checkAuthLoader},
   {path: '/Signup', element: <Signup/>, loader: checkAuthLoader}
   ],
 }
